@@ -1,0 +1,22 @@
+# Mac OS X
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editors
+.vscode
+.idea
+
+# NPM
+node_modules/
+
+# Sass
+.sass-cache
+.sass-cache/
+.sass-cache/*
+*.map
