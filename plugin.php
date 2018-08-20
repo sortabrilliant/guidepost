@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Guidepost — Sorta Brillian
+ * Plugin Name: Guidepost — Sorta Brilliant
  * Plugin URI: https://github.com/sortabrilliant/sbb-guidepost/
  * Description: A Gutenberg block that generates a table of contents for the current post.
- * Author: nickhamze, jrtashjian
+ * Author: Sorta Brilliant
  * Author URI: https://sortabrilliant.com
  * Version: 1.0.0
  * License: GPL2+
