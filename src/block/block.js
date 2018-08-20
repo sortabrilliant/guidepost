@@ -40,6 +40,8 @@ registerBlockType( 'sbb/guidepost', {
 	},
 
 	edit: function( props ) {
+		const editor = wp.data.select( 'core/editor' );
+		const headingBlocks = editor.getBlocks().filter( block => block.name === 'core/heading' );
 		return (
 			<div className={ props.className }>
 			</div>
