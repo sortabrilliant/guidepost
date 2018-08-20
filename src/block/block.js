@@ -35,6 +35,10 @@ registerBlockType( 'sbb/guidepost', {
 		__( 'Sorta Brilliant' ),
 	],
 
+	attributes: {
+		hierarchy: { type: 'array' },
+	},
+
 	edit: function( props ) {
 		return (
 			<div className={ props.className }>
