@@ -42,6 +42,13 @@ registerBlockType( 'sbb/guidepost', {
 	edit: function( props ) {
 		const editor = wp.data.select( 'core/editor' );
 		const headingBlocks = editor.getBlocks().filter( block => block.name === 'core/heading' );
+
+		// Add anchors to any headings that don't have one.
+		headingBlocks.forEach( function( heading, key ) {
+			if ( typeof heading.attributes.anchor === 'undefined' ) {
+				heading.attributes.anchor = key + '-' + heading.attributes.content.toString().toLowerCase().replace( ' ', '-' );
+			}
+		} );
 		return (
 			<div className={ props.className }>
 			</div>
