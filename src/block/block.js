@@ -49,6 +49,51 @@ registerBlockType( 'sbb/guidepost', {
 				heading.attributes.anchor = key + '-' + heading.attributes.content.toString().toLowerCase().replace( ' ', '-' );
 			}
 		} );
+
+		const linearToNestedList = function( array ) {
+			const returnValue = [];
+
+			array.forEach( function( heading, key ) {
+				// Make sure we are only working with the same level as the first iteration in our set.
+				if ( heading.attributes.level === array[ 0 ].attributes.level ) {
+					// Check that the next iteration will return a value.
+					// If it does and the next level is greater than the current level,
+					// the next iteration becomes a child of the current interation.
+					if (
+						( typeof array[ key + 1 ] !== 'undefined' ) &&
+						( array[ key + 1 ].attributes.level > heading.attributes.level )
+					) {
+						// We need to calculate the last index before the next iteration that has the same level (siblings).
+						// We then use this last index to slice the array for use in recursion.
+						// This prevents duplicate nodes.
+						let endOfSlice = array.length;
+						for ( let i = ( key + 1 ); i < array.length; i++ ) {
+							if ( array[ i ].attributes.level === heading.attributes.level ) {
+								endOfSlice = i;
+								break;
+							}
+						}
+
+						// We found a child node: Push a new node onto the return array with children.
+						returnValue.push( {
+							block: heading,
+							children: linearToNestedList( array.slice( key + 1, endOfSlice ) ),
+						} );
+					} else {
+						// No child node: Push a new node onto the return array.
+						returnValue.push( {
+							block: heading,
+							children: null,
+						} );
+					}
+				}
+			} );
+
+			return returnValue;
+		};
+
+		props.attributes.hierarchy = linearToNestedList( headingBlocks );
+
 		return (
 			<div className={ props.className }>
 			</div>
