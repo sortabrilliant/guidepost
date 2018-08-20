@@ -12,6 +12,43 @@ import './editor.scss';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
+class Guidepost extends React.Component {
+	render() {
+		const nodes = this.props.headings.map( function( heading ) {
+			return (
+				<Node key={ heading.block.attributes.anchor } node={ heading.block } children={ heading.children } />
+			);
+		} );
+
+		return (
+			<ul>
+				{ nodes }
+			</ul>
+		);
+	}
+}
+
+class Node extends React.Component {
+	render() {
+		let childnodes = null;
+
+		if ( this.props.children ) {
+			childnodes = this.props.children.map( function( childnode ) {
+				return (
+					<Node key={ childnode.block.attributes.anchor } node={ childnode.block } children={ childnode.children } />
+				);
+			} );
+		}
+
+		return (
+			<li key={ this.props.node.attributes.anchor }>
+				<a href={ '#' + this.props.node.attributes.anchor }>{ this.props.node.attributes.content.toString() }</a>
+				{ childnodes ? <ul>{ childnodes }</ul> : null }
+			</li>
+		);
+	}
+}
+
 /**
  * Register: aa Gutenberg Block.
  *
@@ -96,12 +133,15 @@ registerBlockType( 'sbb/guidepost', {
 
 		return (
 			<div className={ props.className }>
+				<Guidepost headings={ props.attributes.hierarchy } />
 			</div>
 		);
 	},
 
 	save: function( props ) {
 		return (
+			<div className={ props.className }>
+				<Guidepost headings={ props.attributes.hierarchy } />
 			</div>
 		);
 	},
