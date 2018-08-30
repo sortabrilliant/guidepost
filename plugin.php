@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Guidepost — Sorta Brilliant
  * Plugin URI: https://github.com/sortabrilliant/sbb-guidepost/
- * Description: A Gutenberg block that generates a table of contents for the current post.
+ * Description: Add a list of internal links allowing your readers to quickly navigate around.
  * Author: Sorta Brilliant
  * Author URI: https://sortabrilliant.com
  * Version: 1.0.0
