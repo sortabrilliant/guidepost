@@ -5,7 +5,7 @@
  * Enqueue CSS/JS of all the blocks.
  *
  * @since   1.0.0
- * @package CGB
+ * @package SBB
  */
 
 // Exit if accessed directly.
@@ -16,22 +16,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Enqueue Gutenberg block assets for both frontend + backend.
  *
- * `wp-blocks`: includes block type registration and related functions.
- *
  * @since 1.0.0
  */
-function sbb_guidepost_cgb_block_assets() {
+function sbb_guidepost_block_assets() {
 	// Styles.
 	wp_enqueue_style(
-		'sbb_guidepost-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		array( 'wp-blocks' ) // Dependency to include the CSS after it.
-		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
+		'sbb-guidepost-style-css',
+		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+		array( 'wp-blocks' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
-} // End function sbb_guidepost_cgb_block_assets().
+}
 
-// Hook: Frontend assets.
-add_action( 'enqueue_block_assets', 'sbb_guidepost_cgb_block_assets' );
+add_action( 'enqueue_block_assets', 'sbb_guidepost_block_assets' );
 
 /**
  * Enqueue Gutenberg block assets for backend editor.
@@ -42,24 +39,23 @@ add_action( 'enqueue_block_assets', 'sbb_guidepost_cgb_block_assets' );
  *
  * @since 1.0.0
  */
-function sbb_guidepost_cgb_editor_assets() {
+function sbb_guidepost_editor_assets() {
 	// Scripts.
 	wp_enqueue_script(
-		'sbb_guidepost-cgb-block-js', // Handle.
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element' ), // Dependencies, defined above.
-		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
-		true // Enqueue the script in the footer.
+		'sbb-guidepost-block-js',
+		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
+		true
 	);
 
 	// Styles.
 	wp_enqueue_style(
-		'sbb_guidepost-cgb-block-editor-css', // Handle.
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-		array( 'wp-edit-blocks' ) // Dependency to include the CSS after it.
-		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: filemtime — Gets file modification time.
+		'sbb-guidepost-block-editor-css',
+		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+		array( 'wp-edit-blocks' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
 	);
-} // End function sbb_guidepost_cgb_editor_assets().
+}
 
-// Hook: Editor assets.
-add_action( 'enqueue_block_editor_assets', 'sbb_guidepost_cgb_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'sbb_guidepost_editor_assets' );

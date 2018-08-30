@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Guidepost — Sorta Brilliant
- * Plugin URI: https://github.com/sortabrilliant/sbb-guidepost/
+ * Plugin URI: https://github.com/sortabrilliant/guidepost/
  * Description: Add a list of internal links allowing your readers to quickly navigate around.
  * Author: Sorta Brilliant
  * Author URI: https://sortabrilliant.com
