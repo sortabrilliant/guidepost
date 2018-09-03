@@ -82,7 +82,7 @@ class Guidepost extends React.Component {
 		super( props );
 
 		this.state = {
-			headings: [],
+			headings: props.headings,
 		};
 	}
 
@@ -91,10 +91,6 @@ class Guidepost extends React.Component {
 			this.setState( {
 				headings: linearToNestedList( getHeadingBlocks() ),
 			} );
-		} );
-
-		this.setState( {
-			headings: linearToNestedList( getHeadingBlocks() ),
 		} );
 	}
 
@@ -155,22 +151,23 @@ registerBlockType( 'sbb/guidepost', {
 	},
 
 	edit: function( props ) {
-		// const hierarchy = linearToNestedList( getHeadingBlocks() );
+		const hierarchy = linearToNestedList( getHeadingBlocks() );
 		// props.attributes.hierarchy = hierarchy;
-
-		// console.log( 'sbb/guidepost edit' );
 
 		return (
 			<div className={ props.className }>
-				<Guidepost headings={ props.attributes.hierarchy } />
+				<Guidepost headings={ hierarchy } />
 			</div>
 		);
 	},
 
 	save: function( props ) {
+		const hierarchy = linearToNestedList( getHeadingBlocks() );
+		// props.attributes.hierarchy = hierarchy;
+
 		return (
 			<div className={ props.className }>
-				<Guidepost headings={ props.attributes.hierarchy } />
+				<Guidepost headings={ hierarchy } />
 			</div>
 		);
 	},
