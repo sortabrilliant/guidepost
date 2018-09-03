@@ -104,9 +104,11 @@ class Node extends React.Component {
 			} );
 		}
 
+		const nodeText = this.props.node.attributes.content[ 0 ] || '';
+
 		return (
 			<li key={ this.props.node.attributes.anchor }>
-				<a href={ '#' + this.props.node.attributes.anchor }>{ this.props.node.attributes.content.toString() }</a>
+				<a href={ '#' + this.props.node.attributes.anchor } data-level={ this.props.node.attributes.level }>{ nodeText.toString() }</a>
 				{ childnodes ? <ul>{ childnodes }</ul> : null }
 			</li>
 		);
