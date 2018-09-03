@@ -10,6 +10,7 @@ import './editor.scss';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { subscribe } = wp.data;
 const el = wp.element.createElement;
 
 const iconEl = el( 'svg', { width: 24, height: 24 },
@@ -77,8 +78,28 @@ const getHeadingBlocks = function() {
 };
 
 class Guidepost extends React.Component {
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			headings: [],
+		};
+	}
+
+	componentDidMount() {
+		const unsubscribe = subscribe( () => {
+			this.setState( {
+				headings: linearToNestedList( getHeadingBlocks() ),
+			} );
+		} );
+
+		this.setState( {
+			headings: linearToNestedList( getHeadingBlocks() ),
+		} );
+	}
+
 	render() {
-		const nodes = this.props.headings.map( function( heading ) {
+		const nodes = this.state.headings.map( function( heading ) {
 			return (
 				<Node key={ heading.block.attributes.anchor } node={ heading.block } children={ heading.children } />
 			);
