@@ -152,7 +152,6 @@ registerBlockType( 'sbb/guidepost', {
 
 	edit: function( props ) {
 		const hierarchy = linearToNestedList( getHeadingBlocks() );
-		// props.attributes.hierarchy = hierarchy;
 
 		return (
 			<div className={ props.className }>
@@ -163,7 +162,6 @@ registerBlockType( 'sbb/guidepost', {
 
 	save: function( props ) {
 		const hierarchy = linearToNestedList( getHeadingBlocks() );
-		// props.attributes.hierarchy = hierarchy;
 
 		return (
 			<div className={ props.className }>
