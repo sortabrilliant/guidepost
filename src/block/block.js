@@ -45,6 +45,11 @@ registerBlockType( 'sbb/guidepost', {
 		},
 	},
 
+	supports: {
+		html: false,
+		multiple: false,
+	},
+
 	edit: function( props ) {
 		let headings = props.attributes.headings || [];
 		const newHeadings = Utils.convertHeadingBlocksToAttributes( Utils.getHeadingBlocks() );
