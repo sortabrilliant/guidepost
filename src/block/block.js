@@ -65,16 +65,56 @@ const linearToNestedList = function( array ) {
 
 const getHeadingBlocks = function() {
 	const editor = wp.data.select( 'core/editor' );
-	const headingBlocks = editor.getBlocks().filter( block => block.name === 'core/heading' );
+	return editor.getBlocks().filter( block => block.name === 'core/heading' );
+};
 
+const convertHeadingBlocksToAttributes = function( headingBlocks ) {
+	return headingBlocks.map( function( heading ) {
+		const level = heading.attributes.level.toString();
+
+		let content = heading.attributes.content || '';
+		if ( typeof content[ 0 ] !== 'undefined' ) {
+			content = content[ 0 ].toString();
+		}
+
+		let anchor = heading.attributes.anchor || '';
+		if ( anchor !== '' && anchor.indexOf( '#' ) === -1 ) {
+			anchor = '#' + anchor;
+		}
+
+		return { content, anchor, level };
+	} );
+};
+
+const updateHeadingBlockAnchors = function() {
 	// Add anchors to any headings that don't have one.
-	headingBlocks.forEach( function( heading, key ) {
-		if ( typeof heading.attributes.anchor === 'undefined' && typeof heading.attributes.content !== 'undefined' ) {
+	getHeadingBlocks().forEach( function( heading, key ) {
+		if (
+			( typeof heading.attributes.anchor === 'undefined' || heading.attributes.anchor === '' ) &&
+			typeof heading.attributes.content !== 'undefined'
+		) {
 			heading.attributes.anchor = key + '-' + heading.attributes.content.toString().toLowerCase().replace( ' ', '-' );
 		}
 	} );
+};
 
-	return headingBlocks;
+const haveHeadingsChanged = function( oldHeadings, newHeadings ) {
+	if ( oldHeadings.length !== newHeadings.length ) {
+		return true;
+	}
+
+	const changedHeadings = oldHeadings.filter( ( heading, index ) => {
+		const newHeading = newHeadings[ index ];
+
+		return (
+			heading.content !== newHeading.content ||
+			heading.anchor !== newHeading.anchor ||
+			heading.level !== newHeading.level
+		);
+	} );
+
+	// Return boolean value from length.
+	return ! ! +changedHeadings.length;
 };
 
 class Guidepost extends React.Component {
