@@ -36,7 +36,7 @@ export default class Guidepost extends Component {
 
 	render() {
 		if ( this.state.headings.length === 0 ) {
-			return ( <p>Add some Headings to generate the Guidepost.</p> );
+			return ( <p>Start adding headings and your guidepost will be generated automatically.</p> );
 		}
 
 		const nodes = this.state.headings.map( function( heading ) {
