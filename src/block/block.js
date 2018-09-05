@@ -165,8 +165,8 @@ class Node extends React.Component {
 		}
 
 		return (
-			<li key={ this.props.node.attributes.anchor }>
-				<a href={ '#' + this.props.node.attributes.anchor } data-level={ this.props.node.attributes.level }>{ nodeText.toString() }</a>
+			<li key={ this.props.node.anchor }>
+				<a href={ this.props.node.anchor } data-level={ this.props.node.level }>{ this.props.node.content }</a>
 				{ childnodes ? <ul>{ childnodes }</ul> : null }
 			</li>
 		);
