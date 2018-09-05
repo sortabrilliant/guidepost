@@ -8,6 +8,8 @@
 import './style.scss';
 import './editor.scss';
 
+import Guidepost from './components/Guidepost';
+
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { subscribe } = wp.data;

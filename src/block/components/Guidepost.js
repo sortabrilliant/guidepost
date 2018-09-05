@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import Node from './Node';
 
 export default class Guidepost extends Component {
 	constructor( props ) {
