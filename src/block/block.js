@@ -21,25 +21,25 @@ const linearToNestedList = function( array ) {
 	const returnValue = [];
 
 	array.forEach( function( heading, key ) {
-		if ( typeof heading.attributes.content === 'undefined' ) {
+		if ( typeof heading.content === 'undefined' ) {
 			return;
 		}
 
 		// Make sure we are only working with the same level as the first iteration in our set.
-		if ( heading.attributes.level === array[ 0 ].attributes.level ) {
+		if ( heading.level === array[ 0 ].level ) {
 			// Check that the next iteration will return a value.
 			// If it does and the next level is greater than the current level,
 			// the next iteration becomes a child of the current interation.
 			if (
 				( typeof array[ key + 1 ] !== 'undefined' ) &&
-				( array[ key + 1 ].attributes.level > heading.attributes.level )
+				( array[ key + 1 ].level > heading.level )
 			) {
 				// We need to calculate the last index before the next iteration that has the same level (siblings).
 				// We then use this last index to slice the array for use in recursion.
 				// This prevents duplicate nodes.
 				let endOfSlice = array.length;
 				for ( let i = ( key + 1 ); i < array.length; i++ ) {
-					if ( array[ i ].attributes.level === heading.attributes.level ) {
+					if ( array[ i ].level === heading.level ) {
 						endOfSlice = i;
 						break;
 					}
@@ -127,7 +127,6 @@ class Guidepost extends React.Component {
 	}
 
 	componentDidMount() {
-		const unsubscribe = subscribe( () => {
 			this.setState( {
 				headings: linearToNestedList( getHeadingBlocks() ),
 			} );
@@ -141,7 +140,7 @@ class Guidepost extends React.Component {
 
 		const nodes = this.state.headings.map( function( heading ) {
 			return (
-				<Node key={ heading.block.attributes.anchor } node={ heading.block } children={ heading.children } />
+				<Node key={ heading.block.anchor } node={ heading.block } children={ heading.children } />
 			);
 		} );
 
@@ -160,12 +159,10 @@ class Node extends React.Component {
 		if ( this.props.children ) {
 			childnodes = this.props.children.map( function( childnode ) {
 				return (
-					<Node key={ childnode.block.attributes.anchor } node={ childnode.block } children={ childnode.children } />
+					<Node key={ childnode.block.anchor } node={ childnode.block } children={ childnode.children } />
 				);
 			} );
 		}
-
-		const nodeText = this.props.node.attributes.content[ 0 ] || '';
 
 		return (
 			<li key={ this.props.node.attributes.anchor }>
@@ -203,22 +200,27 @@ registerBlockType( 'sbb/guidepost', {
 	},
 
 	edit: function( props ) {
-		const hierarchy = linearToNestedList( getHeadingBlocks() );
+		let headings = props.attributes.headings || [];
+		const newHeadings = convertHeadingBlocksToAttributes( getHeadingBlocks() );
+
+		if ( haveHeadingsChanged( headings, newHeadings ) ) {
+			headings = newHeadings;
+			props.setAttributes( { headings } );
+
+			updateHeadingBlockAnchors();
+		}
 
 		return (
 			<div className={ props.className }>
-				<Guidepost headings={ hierarchy } />
+				<Guidepost headings={ linearToNestedList( headings ) } blockObject={ props } />
 			</div>
 		);
 	},
 
 	save: function( props ) {
-		const hierarchy = linearToNestedList( getHeadingBlocks() );
-
-		return (
 		return props.attributes.headings.length === 0 ? null : (
 			<div className={ props.className }>
-				<Guidepost headings={ hierarchy } />
+				<Guidepost headings={ linearToNestedList( props.attributes.headings ) } />
 			</div>
 		);
 	},
