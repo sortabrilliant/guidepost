@@ -1,6 +1,10 @@
 import { Component } from 'react';
 import Node from './Node';
 
+import { linearToNestedList, getHeadingBlocks, convertHeadingBlocksToAttributes } from '../utils';
+
+const { subscribe } = wp.data;
+
 export default class Guidepost extends Component {
 	constructor( props ) {
 		super( props );
