@@ -95,6 +95,10 @@ class Guidepost extends React.Component {
 	}
 
 	render() {
+		if ( this.state.headings.length === 0 ) {
+			return ( <p>Add some Headings to generate the Guidepost.</p> );
+		}
+
 		const nodes = this.state.headings.map( function( heading ) {
 			return (
 				<Node key={ heading.block.attributes.anchor } node={ heading.block } children={ heading.children } />
