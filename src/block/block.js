@@ -123,14 +123,22 @@ class Guidepost extends React.Component {
 
 		this.state = {
 			headings: props.headings,
+			wpDataUnsubscribe: null,
 		};
 	}
 
 	componentDidMount() {
-			this.setState( {
-				headings: linearToNestedList( getHeadingBlocks() ),
-			} );
+		const wpDataUnsubscribe = subscribe( () => {
+			const headings = linearToNestedList( convertHeadingBlocksToAttributes( getHeadingBlocks() ) );
+			this.setState( { headings } );
 		} );
+
+		this.setState( { wpDataUnsubscribe } );
+	}
+
+	componentWillUnmount() {
+		this.state.wpDataUnsubscribe();
+	}
 
 	componentWillUpdate( nextProps, nextState ) {
 		if ( JSON.stringify( nextProps.headings ) !== JSON.stringify( nextState.headings ) ) {
