@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Node from './Node';
 
-import { linearToNestedList, getHeadingBlocks, convertHeadingBlocksToAttributes } from '../utils';
+import * as Utils from '../utils';
 
 const { subscribe } = wp.data;
 
@@ -17,7 +17,7 @@ export default class Guidepost extends Component {
 
 	componentDidMount() {
 		const wpDataUnsubscribe = subscribe( () => {
-			const headings = linearToNestedList( convertHeadingBlocksToAttributes( getHeadingBlocks() ) );
+			const headings = Utils.linearToNestedList( Utils.convertHeadingBlocksToAttributes( Utils.getHeadingBlocks() ) );
 			this.setState( { headings } );
 		} );
 
@@ -30,7 +30,7 @@ export default class Guidepost extends Component {
 
 	componentShouldUpdate( nextProps, nextState ) {
 		if ( JSON.stringify( nextProps.headings ) !== JSON.stringify( nextState.headings ) ) {
-			this.props.blockObject.setAttributes( { headings: convertHeadingBlocksToAttributes( getHeadingBlocks() ) } );
+			this.props.blockObject.setAttributes( { headings: Utils.convertHeadingBlocksToAttributes( Utils.getHeadingBlocks() ) } );
 		}
 	}
 

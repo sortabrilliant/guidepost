@@ -8,7 +8,7 @@
 import './style.scss';
 import './editor.scss';
 
-import { linearToNestedList, getHeadingBlocks, convertHeadingBlocksToAttributes } from './utils';
+import * as Utils from './utils';
 import Guidepost from './components/Guidepost';
 
 const { __ } = wp.i18n;
@@ -18,37 +18,6 @@ const el = wp.element.createElement;
 const iconEl = el( 'svg', { width: 24, height: 24 },
 	el( 'path', { d: 'M21.71,11.29l-9-9c-0.39-0.39-1.02-0.39-1.41,0l-9,9c-0.39,0.39-0.39,1.02,0,1.41l9,9c0.39,0.39,1.02,0.39,1.41,0l9-9C22.1,12.32,22.1,11.69,21.71,11.29z M14,14.5V12h-4v2c0,0.55-0.45,1-1,1h0c-0.55,0-1-0.45-1-1v-3c0-0.55,0.45-1,1-1h5V7.5l3.15,3.15c0.2,0.2,0.2,0.51,0,0.71L14,14.5z' } )
 );
-
-const updateHeadingBlockAnchors = function() {
-	// Add anchors to any headings that don't have one.
-	getHeadingBlocks().forEach( function( heading, key ) {
-		if (
-			( typeof heading.attributes.anchor === 'undefined' || heading.attributes.anchor === '' ) &&
-			typeof heading.attributes.content !== 'undefined'
-		) {
-			heading.attributes.anchor = key + '-' + heading.attributes.content.toString().toLowerCase().replace( ' ', '-' );
-		}
-	} );
-};
-
-const haveHeadingsChanged = function( oldHeadings, newHeadings ) {
-	if ( oldHeadings.length !== newHeadings.length ) {
-		return true;
-	}
-
-	const changedHeadings = oldHeadings.filter( ( heading, index ) => {
-		const newHeading = newHeadings[ index ];
-
-		return (
-			heading.content !== newHeading.content ||
-			heading.anchor !== newHeading.anchor ||
-			heading.level !== newHeading.level
-		);
-	} );
-
-	// Return boolean value from length.
-	return ! ! +changedHeadings.length;
-};
 
 /**
  * Register our Gutenberg block.
@@ -78,18 +47,18 @@ registerBlockType( 'sbb/guidepost', {
 
 	edit: function( props ) {
 		let headings = props.attributes.headings || [];
-		const newHeadings = convertHeadingBlocksToAttributes( getHeadingBlocks() );
+		const newHeadings = Utils.convertHeadingBlocksToAttributes( Utils.getHeadingBlocks() );
 
-		if ( haveHeadingsChanged( headings, newHeadings ) ) {
+		if ( Utils.haveHeadingsChanged( headings, newHeadings ) ) {
 			headings = newHeadings;
 			props.setAttributes( { headings } );
 
-			updateHeadingBlockAnchors();
+			Utils.updateHeadingBlockAnchors();
 		}
 
 		return (
 			<div className={ props.className }>
-				<Guidepost headings={ linearToNestedList( headings ) } blockObject={ props } />
+				<Guidepost headings={ Utils.linearToNestedList( headings ) } blockObject={ props } />
 			</div>
 		);
 	},
@@ -97,7 +66,7 @@ registerBlockType( 'sbb/guidepost', {
 	save: function( props ) {
 		return props.attributes.headings.length === 0 ? null : (
 			<div className={ props.className }>
-				<Guidepost headings={ linearToNestedList( props.attributes.headings ) } />
+				<Guidepost headings={ Utils.linearToNestedList( props.attributes.headings ) } />
 			</div>
 		);
 	},

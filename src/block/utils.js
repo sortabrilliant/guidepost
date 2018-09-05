@@ -67,3 +67,34 @@ export function convertHeadingBlocksToAttributes( headingBlocks ) {
 		return { content, anchor, level };
 	} );
 }
+
+export function updateHeadingBlockAnchors() {
+	// Add anchors to any headings that don't have one.
+	getHeadingBlocks().forEach( function( heading, key ) {
+		if (
+			( typeof heading.attributes.anchor === 'undefined' || heading.attributes.anchor === '' ) &&
+			typeof heading.attributes.content !== 'undefined'
+		) {
+			heading.attributes.anchor = key + '-' + heading.attributes.content.toString().toLowerCase().replace( ' ', '-' );
+		}
+	} );
+}
+
+export function haveHeadingsChanged( oldHeadings, newHeadings ) {
+	if ( oldHeadings.length !== newHeadings.length ) {
+		return true;
+	}
+
+	const changedHeadings = oldHeadings.filter( ( heading, index ) => {
+		const newHeading = newHeadings[ index ];
+
+		return (
+			heading.content !== newHeading.content ||
+			heading.anchor !== newHeading.anchor ||
+			heading.level !== newHeading.level
+		);
+	} );
+
+	// Return boolean value from length.
+	return ! ! +changedHeadings.length;
+}
