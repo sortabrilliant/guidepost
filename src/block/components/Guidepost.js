@@ -28,7 +28,7 @@ export default class Guidepost extends Component {
 		this.state.wpDataUnsubscribe();
 	}
 
-	componentWillUpdate( nextProps, nextState ) {
+	componentShouldUpdate( nextProps, nextState ) {
 		if ( JSON.stringify( nextProps.headings ) !== JSON.stringify( nextState.headings ) ) {
 			this.props.blockObject.setAttributes( { headings: convertHeadingBlocksToAttributes( getHeadingBlocks() ) } );
 		}
