@@ -131,6 +131,11 @@ class Guidepost extends React.Component {
 				headings: linearToNestedList( getHeadingBlocks() ),
 			} );
 		} );
+
+	componentWillUpdate( nextProps, nextState ) {
+		if ( JSON.stringify( nextProps.headings ) !== JSON.stringify( nextState.headings ) ) {
+			this.props.blockObject.setAttributes( { headings: convertHeadingBlocksToAttributes( getHeadingBlocks() ) } );
+		}
 	}
 
 	render() {
