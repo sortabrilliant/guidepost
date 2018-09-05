@@ -151,7 +151,15 @@ registerBlockType( 'sbb/guidepost', {
 	],
 
 	attributes: {
-		hierarchy: { type: 'array' },
+		headings: {
+			source: 'query',
+			selector: 'a',
+			query: {
+				content: { source: 'text' },
+				anchor: { source: 'attribute', attribute: 'href' },
+				level: { source: 'attribute', attribute: 'data-level' },
+			},
+		},
 	},
 
 	edit: function( props ) {
