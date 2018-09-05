@@ -164,6 +164,7 @@ registerBlockType( 'sbb/guidepost', {
 		const hierarchy = linearToNestedList( getHeadingBlocks() );
 
 		return (
+		return props.attributes.headings.length === 0 ? null : (
 			<div className={ props.className }>
 				<Guidepost headings={ hierarchy } />
 			</div>
