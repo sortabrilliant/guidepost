@@ -28,8 +28,6 @@ require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
 function sbb_github_plugin_updater_test_init() {
 	include_once 'updater.php';
 
-	// define( 'WP_GITHUB_FORCE_UPDATE', true );
-
 	if ( is_admin() ) {
 		$config = array(
 			'slug'               => plugin_basename( __FILE__ ),
