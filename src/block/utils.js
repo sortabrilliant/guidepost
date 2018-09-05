@@ -1,5 +1,4 @@
 
-// const linearToNestedList = function( array ) {
 export function linearToNestedList( array ) {
 	const returnValue = [];
 
@@ -46,13 +45,11 @@ export function linearToNestedList( array ) {
 	return returnValue;
 }
 
-// const getHeadingBlocks = function() {
 export function getHeadingBlocks() {
 	const editor = wp.data.select( 'core/editor' );
 	return editor.getBlocks().filter( block => block.name === 'core/heading' );
 }
 
-// const convertHeadingBlocksToAttributes = function( headingBlocks ) {
 export function convertHeadingBlocksToAttributes( headingBlocks ) {
 	return headingBlocks.map( function( heading ) {
 		const level = heading.attributes.level.toString();
@@ -70,5 +67,3 @@ export function convertHeadingBlocksToAttributes( headingBlocks ) {
 		return { content, anchor, level };
 	} );
 }
-
-// export { linearToNestedList, getHeadingBlocks, convertHeadingBlocksToAttributes };
