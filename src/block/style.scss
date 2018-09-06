@@ -5,4 +5,36 @@
  */
 
 .wp-block-sbb-guidepost {
+	.sbb-guidepost-btt {
+		display: flex;
+		padding: 17px;
+
+		position: fixed;
+		bottom: 30px;
+		right: 30px;
+
+		opacity: 0;
+
+		background-color: rgba( 170, 170, 170, .5 );
+		transition: background-color .3s, opacity .3s;
+
+		&, &:hover {
+			box-shadow: none;
+		}
+
+		&:hover {
+			background-color: rgba( 170, 170, 170, 1 );
+		}
+
+		svg {
+			position: relative;
+			top: 3px;
+			height: 26px;
+			width: 26px;
+		}
+
+		&.visible {
+			opacity: 1;
+		}
+	}
 }

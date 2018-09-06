@@ -26,6 +26,17 @@ function sbb_guidepost_block_assets() {
 		array( 'wp-blocks' ),
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
+
+	if ( ! is_admin() ) {
+		// Scripts.
+		wp_enqueue_script(
+			'sbb-guidepost-theme-js',
+			plugins_url( '/src/sbb-guidepost-theme.js', dirname( __FILE__ ) ),
+			array( 'jquery' ),
+			filemtime( plugin_dir_path( __DIR__ ) . 'src/sbb-guidepost-theme.js' ),
+			true
+		);
+	}
 }
 
 add_action( 'enqueue_block_assets', 'sbb_guidepost_block_assets' );
