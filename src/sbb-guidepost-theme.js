@@ -24,6 +24,18 @@
 				}
 			} );
 
+			$( document ).on( 'click', 'a[href*=#]', function ( event ) {
+				event.preventDefault();
+
+				var hash = $( this ).attr( 'href' );
+
+				$( 'html, body' ).animate( {
+					scrollTop: $(hash).offset().top
+				}, 500, function() {
+					window.location.hash = hash;
+				} );
+			} );
+
 		}
 	} );
 
