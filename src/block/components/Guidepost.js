@@ -18,6 +18,7 @@ export default class Guidepost extends Component {
 	componentDidMount() {
 		const wpDataUnsubscribe = subscribe( () => {
 			const headings = Utils.linearToNestedList( Utils.convertHeadingBlocksToAttributes( Utils.getHeadingBlocks() ) );
+			Utils.updateHeadingBlockAnchors();
 			this.setState( { headings } );
 		} );
 
