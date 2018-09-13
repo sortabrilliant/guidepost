@@ -27,7 +27,7 @@ function sbb_guidepost_block_assets() {
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' )
 	);
 
-	if ( ! is_admin() ) {
+	if ( ! is_admin() && is_singular() ) {
 		// Scripts.
 		wp_enqueue_script(
 			'sbb-guidepost-theme-js',
