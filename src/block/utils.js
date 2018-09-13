@@ -71,10 +71,11 @@ export function convertHeadingBlocksToAttributes( headingBlocks ) {
 export function updateHeadingBlockAnchors() {
 	// Add anchors to any headings that don't have one.
 	getHeadingBlocks().forEach( function( heading, key ) {
-		if (
-			( typeof heading.attributes.anchor === 'undefined' || heading.attributes.anchor === '' ) &&
-			typeof heading.attributes.content !== 'undefined'
-		) {
+		const headingAnchorEmpty = ( typeof heading.attributes.anchor === 'undefined' || heading.attributes.anchor === '' );
+		const headingContentEmpty = ( typeof heading.attributes.content === 'undefined' || heading.attributes.content === '' );
+		const headingDefaultAnchor = ( ! headingAnchorEmpty && heading.attributes.anchor.indexOf( key + '-' ) === 0 );
+
+		if ( ! headingContentEmpty && ( headingAnchorEmpty || headingDefaultAnchor ) ) {
 			heading.attributes.anchor = key + '-' + heading.attributes.content.toString().toLowerCase().replace( ' ', '-' );
 		}
 	} );
