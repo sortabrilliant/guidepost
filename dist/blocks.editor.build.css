@@ -1,1 +1,14 @@
-.wp-block-sbb-guidepost ul{padding-left:1.3em;margin-left:1.3em}.wp-block-sbb-guidepost p{opacity:.5}
+/**
+ * Common SCSS
+ *
+ * Variables and mixins that are used across the project.
+*/
+/**
+ * Editor Styles
+ */
+.editor-block-list__block .wp-block-sbb-guidepost ul {
+  padding-left: 1.3em;
+  margin-left: 1.3em; }
+
+.wp-block-sbb-guidepost p {
+  opacity: .5; }
