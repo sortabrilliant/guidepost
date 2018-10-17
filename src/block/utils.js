@@ -67,7 +67,7 @@ export function convertHeadingBlocksToAttributes( headingBlocks ) {
 		let anchor = contentDiv.textContent || contentDiv.innerText || '';
 
 		if ( anchor !== '' && anchor.indexOf( '#' ) === -1 ) {
-			anchor = '#' + anchor;
+			anchor = '#' + anchor.replace( / /g, '-' );
 		}
 
 		return { content, anchor, level };
