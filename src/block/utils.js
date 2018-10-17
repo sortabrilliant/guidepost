@@ -54,12 +54,18 @@ export function convertHeadingBlocksToAttributes( headingBlocks ) {
 	return headingBlocks.map( function( heading ) {
 		const level = heading.attributes.level.toString();
 
-		let content = heading.attributes.content || '';
-		if ( typeof content[ 0 ] !== 'undefined' ) {
-			content = content[ 0 ].toString();
-		}
+		let headingContent = heading.attributes.content || '';
+		let anchorContent = heading.attributes.anchor || '';
 
-		let anchor = heading.attributes.anchor || '';
+		// strip html from heading and attribute content
+		let contentDiv = document.createElement('div');
+
+		contentDiv.innerHTML = headingContent;
+		const content = contentDiv.textContent || contentDiv.innerText || '';
+
+		contentDiv.innerHTML = anchorContent;
+		let anchor = contentDiv.textContent || contentDiv.innerText || '';
+
 		if ( anchor !== '' && anchor.indexOf( '#' ) === -1 ) {
 			anchor = '#' + anchor;
 		}
