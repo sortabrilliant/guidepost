@@ -41,7 +41,7 @@ function sbb_github_plugin_updater_test_init() {
 			'readme'             => 'README.md',
 		);
 
-		new WP_GitHub_Updater( $config );
+		new SBB_Guidepost_GitHub_Updater( $config );
 	}
 }
 add_action( 'init', 'sbb_github_plugin_updater_test_init' );

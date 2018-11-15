@@ -1,7 +1,7 @@
 <?php
 
 // Prevent loading this file directly and/or if the class is already defined
-if ( ! defined( 'ABSPATH' ) || class_exists( 'WPGitHubUpdater' ) || class_exists( 'WP_GitHub_Updater' ) ) {
+if ( ! defined( 'ABSPATH' ) || class_exists('SBB_Guidepost_GitHub_Updater' ) ) {
 	return;
 }
 
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) || class_exists( 'WPGitHubUpdater' ) || class_exists
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-class WP_GitHub_Updater {
+class SBB_Guidepost_GitHub_Updater {
 
 	/**
 	 * GitHub Updater version
