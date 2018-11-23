@@ -1,3 +1,4 @@
+import slugify from 'slugify';
 
 export function linearToNestedList( array ) {
 	const returnValue = [];
@@ -67,7 +68,7 @@ export function convertHeadingBlocksToAttributes( headingBlocks ) {
 		let anchor = contentDiv.textContent || contentDiv.innerText || '';
 
 		if ( anchor !== '' && anchor.indexOf( '#' ) === -1 ) {
-			anchor = '#' + anchor.replace( / /g, '-' );
+			anchor = '#' + slugify( anchor, { remove: /[^\w\s-]/g } );
 		}
 
 		return { content, anchor, level };
@@ -82,7 +83,7 @@ export function updateHeadingBlockAnchors() {
 		const headingDefaultAnchor = ( ! headingAnchorEmpty && heading.attributes.anchor.indexOf( key + '-' ) === 0 );
 
 		if ( ! headingContentEmpty && ( headingAnchorEmpty || headingDefaultAnchor ) ) {
-			heading.attributes.anchor = key + '-' + heading.attributes.content.toString().toLowerCase().replace( ' ', '-' );
+			heading.attributes.anchor = key + '-' + slugify( heading.attributes.content.toString(), { remove: /[^\w\s-]/g } );
 		}
 	} );
 }
