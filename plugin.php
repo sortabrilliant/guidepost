@@ -5,7 +5,7 @@
  * Description: Add a list of internal links allowing your readers to quickly navigate around.
  * Author: sorta brilliant
  * Author URI: https://sortabrilliant.com
- * Version: 1.0.3
+ * Version: 1.0.4
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  *

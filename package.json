@@ -1,6 +1,6 @@
 {
   "name": "sbb-guidepost-cgb-guten-block",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "start": "cgb-scripts start",
