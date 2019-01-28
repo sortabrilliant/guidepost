@@ -31,7 +31,7 @@ function sbb_github_plugin_updater_test_init() {
 	if ( is_admin() ) {
 		$config = array(
 			'slug'               => plugin_basename( __FILE__ ),
-			'proper_folder_name' => 'sbb-guidepost',
+			'proper_folder_name' => 'guidepost',
 			'api_url'            => 'https://api.github.com/repos/sortabrilliant/guidepost',
 			'raw_url'            => 'https://raw.github.com/sortabrilliant/guidepost/master',
 			'github_url'         => 'https://github.com/sortabrilliant/guidepost',
