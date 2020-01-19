@@ -12,8 +12,11 @@ Desktop.ini
 .vscode
 .idea
 
-# NPM
 node_modules/
+vendor/
+wordpress/
+build/
+release/
 
 # Sass
 .sass-cache

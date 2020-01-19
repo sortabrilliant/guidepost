@@ -4,10 +4,6 @@
  * Registering the Guidepost block with Gutenberg.
  */
 
-//  Import CSS.
-import './style.scss';
-import './editor.scss';
-
 import * as Utils from './utils';
 import Guidepost from './components/Guidepost';
 
@@ -50,7 +46,7 @@ registerBlockType( 'sbb/guidepost', {
 		multiple: false,
 	},
 
-	edit: function( props ) {
+	edit: ( props ) => {
 		let headings = props.attributes.headings || [];
 		const newHeadings = Utils.convertHeadingBlocksToAttributes( Utils.getHeadingBlocks() );
 
@@ -68,7 +64,7 @@ registerBlockType( 'sbb/guidepost', {
 		);
 	},
 
-	save: function( props ) {
+	save: ( props ) => {
 		return props.attributes.headings.length === 0 ? null : (
 			<div className={ props.className }>
 				<Guidepost headings={ Utils.linearToNestedList( props.attributes.headings ) } />
