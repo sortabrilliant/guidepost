@@ -1,4 +1,5 @@
 import slugify from 'slugify';
+import { select } from '@wordpress/data';
 
 export function linearToNestedList( array ) {
 	const returnValue = [];
@@ -47,19 +48,19 @@ export function linearToNestedList( array ) {
 }
 
 export function getHeadingBlocks() {
-	const editor = wp.data.select( 'core/editor' );
-	return editor.getBlocks().filter( block => block.name === 'core/heading' );
+	const editor = select( 'core/editor' );
+	return editor.getBlocks().filter( ( block ) => block.name === 'core/heading' );
 }
 
 export function convertHeadingBlocksToAttributes( headingBlocks ) {
 	return headingBlocks.map( function( heading ) {
 		const level = heading.attributes.level.toString();
 
-		let headingContent = heading.attributes.content || '';
-		let anchorContent = heading.attributes.anchor || '';
+		const headingContent = heading.attributes.content || '';
+		const anchorContent = heading.attributes.anchor || '';
 
 		// strip html from heading and attribute content
-		let contentDiv = document.createElement('div');
+		const contentDiv = document.createElement( 'div' );
 
 		contentDiv.innerHTML = headingContent;
 		const content = contentDiv.textContent || contentDiv.innerText || '';

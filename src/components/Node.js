@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component } from '@wordpress/element';
 
 export default class Node extends Component {
 	render() {

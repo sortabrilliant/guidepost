@@ -1,9 +1,9 @@
-import { Component } from 'react';
+import { Component } from '@wordpress/element';
 import Node from './Node';
 
 import * as Utils from '../utils';
 
-const { subscribe } = wp.data;
+import { subscribe } from '@wordpress/data';
 
 export default class Guidepost extends Component {
 	constructor( props ) {

@@ -10,8 +10,8 @@ module.exports = {
 	entry: {
 		...defaultConfig.entry,
 
-		'guidepost-editor': path.resolve( process.cwd(), 'src/block/editor.scss' ),
-		'guidepost-style': path.resolve( process.cwd(), 'src/block/style.scss' ),
+		'guidepost-editor': path.resolve( process.cwd(), 'src/editor.scss' ),
+		'guidepost-style': path.resolve( process.cwd(), 'src/style.scss' ),
 
 		'sbb-guidepost-theme': path.resolve( process.cwd(), 'src/sbb-guidepost-theme.js' ),
 	},
