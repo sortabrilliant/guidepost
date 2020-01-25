@@ -4,6 +4,8 @@ const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const FixStyleOnlyEntriesPlugin = require( 'webpack-fix-style-only-entries' );
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
 	...defaultConfig,
 
@@ -13,7 +15,7 @@ module.exports = {
 		'guidepost-editor': path.resolve( process.cwd(), 'src/editor.scss' ),
 		'guidepost-style': path.resolve( process.cwd(), 'src/style.scss' ),
 
-		'sbb-guidepost-theme': path.resolve( process.cwd(), 'src/sbb-guidepost-theme.js' ),
+		'guidepost-theme': path.resolve( process.cwd(), 'src/guidepost-theme.js' ),
 	},
 
 	module: {
@@ -24,8 +26,8 @@ module.exports = {
 				test: /\.scss$/,
 				use: [
 					MiniCssExtractPlugin.loader,
-					{ loader: 'css-loader', options: { url: false } },
-					{ loader: 'sass-loader' },
+					{ loader: 'css-loader', options: { url: false, sourceMap: ! isProduction } },
+					{ loader: 'sass-loader', options: { sourceMap: ! isProduction } },
 				],
 			},
 		],
