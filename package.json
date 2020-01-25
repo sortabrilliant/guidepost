@@ -17,8 +17,8 @@
 		"webpack-fix-style-only-entries": "^0.4.0"
 	},
 	"wp-env": {
-		"plugin-dir": "sbb-guidepost",
+		"plugin-dir": "guidepost",
 		"plugin-name": "Guidepost",
-		"welcome-build-command": "npm run start"
+		"welcome-build-command": "npm start"
 	}
 }

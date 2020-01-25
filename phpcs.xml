@@ -53,14 +53,14 @@
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" value="sbb"/>
+			<property name="text_domain" value="guidepost"/>
 		</properties>
 	</rule>
 
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
 			<property name="prefixes" type="array">
-				<element value="sbb"/>
+				<element value="guidepost"/>
 			</property>
 		</properties>
 	</rule>
