@@ -1,18 +1,17 @@
 #!/bin/bash
 
-PLUGIN="sbb-guidepost"
+PLUGIN="guidepost"
 VERSION=$(awk '/Version:/{print $NF}' $PLUGIN.php)
-REPOSITORY="https://github.com/sortabrilliant/guidepost"
+
 WORKING_DIR=`pwd`
 
+rm -rf $WORKING_DIR/release
 mkdir -p release/$PLUGIN
-git clone $REPOSITORY release/repo
 
-cd $WORKING_DIR/release/repo
-# composer install --no-dev
-npm install && npm run build
-cd $WORKING_DIR/release
+rm -rf $WORKING_DIR/build
+npm run build
 
-rsync -av --progress --exclude={'.*','wordpress','node_modules','src','release','.gitignore','composer*','package*','webpack*','phpcs.xml','README.md'} repo/* $PLUGIN
+rsync -av --progress --exclude={'.*','node_modules','release','src','vendor','wordpress','composer*','package*','phpcs.xml','README.md','webpack*'} $WORKING_DIR/* $WORKING_DIR/release/$PLUGIN
+cd $WORKING_DIR/release/
 zip -r "${PLUGIN}-${VERSION}.zip" $PLUGIN
-rm -rf repo
+cd $WORKING_DIR/
