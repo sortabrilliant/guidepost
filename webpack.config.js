@@ -12,8 +12,8 @@ module.exports = {
 	entry: {
 		...defaultConfig.entry,
 
-		'guidepost-editor': path.resolve( process.cwd(), 'src/editor.scss' ),
-		'guidepost-style': path.resolve( process.cwd(), 'src/style.scss' ),
+		'guidepost-editor': path.resolve( process.cwd(), 'src/styles/editor.scss' ),
+		'guidepost-style': path.resolve( process.cwd(), 'src/styles/style.scss' ),
 
 		'guidepost-theme': path.resolve( process.cwd(), 'src/guidepost-theme.js' ),
 	},

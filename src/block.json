@@ -1,0 +1,30 @@
+{
+	"name": "sortabrilliant/guidepost",
+	"title": "Guidepost",
+	"category": "common",
+	"description": "Add a list of internal links allowing your readers to quickly navigate around.",
+	"keywords": [ "toc", "sortabrilliant" ],
+	"textDomain": "guidepost",
+	"attributes": {
+		"headings": {
+			"source": "query",
+			"selector": "a",
+			"query": {
+				"content": {
+					"source": "text"
+				},
+				"anchor": {
+					"source": "attribute",
+					"attribute": "href"
+				},
+				"level": {
+					"source": "attribute",
+					"attribute": "data-level"
+				}
+			}
+		}
+	},
+	"editorScript": "build/index.js",
+	"editorStyle": "build/guidepost-editor.css",
+	"style": "build/guidepost-style.css"
+}
