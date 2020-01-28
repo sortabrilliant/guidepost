@@ -5,7 +5,7 @@
  * Description: Add a list of internal links allowing your readers to quickly navigate around.
  * Author: sorta brilliant
  * Author URI: https://sortabrilliant.com
- * Version: 1.0.4
+ * Version: 1.1.0
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  *
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'GUIDEPOST_VERSION', '1.0.4' );
+define( 'GUIDEPOST_VERSION', '1.1.0' );
 define( 'GUIDEPOST_PLUGIN_DIR', dirname( __FILE__ ) );
 define( 'GUIDEPOST_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
