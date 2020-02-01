@@ -1,8 +1,14 @@
-## What is this?
-A guidepost gives you directions. It lets you know where you’re going. It gives you a preview of what’s to come. 
+# Guidepost
 
-## How does it work?
-Guidepost is a block for the upcoming WordPress block editor. The guidepost block is built automatically from your headings. Whenever you add or remove a heading the guidepost block is automatically updated.
+A guidepost gives you directions. It lets you know where you’re going. It gives you a preview of what’s to come.
 
-## Where can I learn more?
-Learn more at [sorta brilliant](https://sortabrilliant.com/guidepost/).
+#### How does it work?
+
+Guideposts are magic, no they really are. Whenever you add or remove a heading the guidepost block is automatically updated.
+
+Nesting is done based on which size heading you use. Headings of smaller sizes are automatically nested under ones of larger sizes.
+
+#### I like this, who made it?
+This plugin is brought to you by [sorta brilliant](https://sortabrilliant.com/) and [block garden](https://block.garden).
+
+![Guidepost](https://ps.w.org/guidepost/assets/screenshot-1.gif?rev=2235520 “Guidepost”)
