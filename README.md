@@ -11,4 +11,5 @@ Nesting is done based on which size heading you use. Headings of smaller sizes a
 #### I like this, who made it?
 This plugin is brought to you by [sorta brilliant](https://sortabrilliant.com/) and [block garden](https://block.garden).
 
-![Guidepost](https://ps.w.org/guidepost/assets/screenshot-1.gif?rev=2235520 “Guidepost”)
+![gp](https://ps.w.org/guidepost/assets/screenshot-1.gif "guidepost")
+
