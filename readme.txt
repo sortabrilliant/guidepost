@@ -1,6 +1,6 @@
 === Guidepost ===
 Contributors: sortabrilliant, jrtashjian
-Tags: typedjs, heading, style
+Tags: typedjs, heading, style, block
 Requires at least: 5.0
 Tested up to: 5.3.2
 Stable tag: 1.1.0
@@ -11,16 +11,21 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 A guidepost gives you directions. It lets you know where you’re going. It gives you a preview of what’s to come.
 
 == Description ==
-Guidepost is a block for the upcoming WordPress block editor. The guidepost block is built automatically from your headings. Whenever you add or remove a heading the guidepost block is automatically updated.
+A guidepost gives you directions. It lets you know where you’re going. It gives you a preview of what’s to come.
+
+#### How does it work?
+
+Guideposts are magic, no they really are. Whenever you add or remove a heading the guidepost block is automatically updated.
 
 Nesting is done based on which size heading you use. Headings of smaller sizes are automatically nested under ones of larger sizes.
+
+#### I like this, who made it?
+This plugin is brought to you by [sorta brilliant](https://sortabrilliant.com/) and [block garden](https://block.garden).
 
 == Screenshots ==
 1. Add the Guidepost block and everything is taken care of automatically.
 
-= Where can I learn more? =
-Learn more at [sorta brilliant](https://sortabrilliant.com/guidepost/).
-
 == Changelog ==
 * Cleanup for directory submission.
+
 
