@@ -1,10 +1,6 @@
-.wp-block-sbb-guidepost {
-	.editor-block-list__block & ul {
+.wp-block[data-type="sortabrilliant/guidepost"] {
+	.ul {
 		padding-left: 1.3em;
 		margin-left: 1.3em;
-	}
-
-	p {
-		opacity: .5;
 	}
 }

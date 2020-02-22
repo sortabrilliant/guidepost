@@ -9,7 +9,7 @@ import jQuery from 'jquery';
 
 		const guidepostBlock = $( '.wp-block-sortabrilliant-guidepost:first' );
 		if ( guidepostBlock.length ) {
-			const backToTopElement = $( '<a class="sbb-guidepost-btt" href="#' + bttTarget + '"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 27.5"><path d="M11.2 10.8v8.9c0 .9.8 1.7 1.7 1.7s1.7-.8 1.7-1.7v-9.1l4.1 4.2c.7.7 1.8.7 2.4 0 .7-.7.7-1.8 0-2.5l-6.9-7c-.7-.7-1.8-.7-2.4 0l-7.1 7.1c-.7.7-.7 1.8 0 2.4.7.7 1.7.7 2.4 0l4.1-4M23.5.1c.9 0 1.7.8 1.7 1.7s-.8 1.7-1.7 1.7h-21C1.6 3.5.8 2.7.8 1.8S1.6.1 2.5.1h21"/></svg></a>' );
+			const backToTopElement = $( '<a class="sortabrilliant-guidepost-button" href="#' + bttTarget + '"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 27.5"><path d="M11.2 10.8v8.9c0 .9.8 1.7 1.7 1.7s1.7-.8 1.7-1.7v-9.1l4.1 4.2c.7.7 1.8.7 2.4 0 .7-.7.7-1.8 0-2.5l-6.9-7c-.7-.7-1.8-.7-2.4 0l-7.1 7.1c-.7.7-.7 1.8 0 2.4.7.7 1.7.7 2.4 0l4.1-4M23.5.1c.9 0 1.7.8 1.7 1.7s-.8 1.7-1.7 1.7h-21C1.6 3.5.8 2.7.8 1.8S1.6.1 2.5.1h21"/></svg></a>' );
 
 			guidepostBlock.attr( 'id', bttTarget );
 			guidepostBlock.append( backToTopElement );

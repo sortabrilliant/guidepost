@@ -8,12 +8,15 @@ import uniqid from 'uniqid';
  * Internal dependencies
  */
 import { Guidepost } from './Guidepost';
+import { Icon as icon } from './icon';
 import { linearToNestedList } from './linear-to-nested-list';
 
 /**
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
+import { Placeholder } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 import { withSelect, dispatch } from '@wordpress/data';
 
@@ -82,7 +85,13 @@ class GuidepostEdit extends Component {
 		const { headings = [] } = this.props.attributes;
 
 		if ( headings < 1 ) {
-			return ( <p>Start adding headings and your guidepost will be generated automatically.</p> );
+			return (
+				<Placeholder
+					icon={ icon }
+					label={ __( 'Guidepost', 'guidepost' ) }
+					instructions={ __( 'Start adding headings and your guidepost will be generated automatically.', 'guidepost' ) }
+				/>
+			);
 		}
 
 		const nestedHeadings = linearToNestedList( headings );
