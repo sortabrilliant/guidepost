@@ -109,7 +109,7 @@ export const Edit = compose( [
 		const { getBlocks } = select( 'core/block-editor' );
 
 		return {
-			headings: getBlocks().filter( ( block ) => block.name === 'core/heading' ),
+			headings: getBlocks().filter( ( block ) => block.name === 'core/heading' && !! block.attributes.content ),
 		};
 	} ),
 ] )( GuidepostEdit );
