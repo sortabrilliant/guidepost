@@ -20,7 +20,7 @@ export const Guidepost = ( props ) => (
 export const Node = ( props ) => (
 	<li>
 		<Disabled>
-			<a href={ `#${ props.anchor }` } data-level={ props.level }>
+			<a href={ `#${ props.anchor.replace( '#', '' ) }` } data-level={ props.level }>
 				{ props.content }
 			</a>
 		</Disabled>
