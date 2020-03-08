@@ -10,7 +10,7 @@ import { Save as save } from './save';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, createBlock } from '@wordpress/blocks';
 
 registerBlockType( 'sortabrilliant/guidepost', {
 	title: __( 'Guidepost', 'guidepost' ),
@@ -27,6 +27,17 @@ registerBlockType( 'sortabrilliant/guidepost', {
 	supports: {
 		html: false,
 		multiple: false,
+	},
+
+	transforms: {
+		from: [
+			{
+				type: 'block',
+				blocks: [ '*' ],
+				isMatch: ( { originalName } ) => originalName === 'sbb/guidepost',
+				transform: () => createBlock( 'sortabrilliant/guidepost' ),
+			},
+		],
 	},
 
 	edit,
