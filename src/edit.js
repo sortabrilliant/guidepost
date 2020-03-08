@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import { kebabCase } from 'lodash';
-import uniqid from 'uniqid';
+import { kebabCase, isEqual } from 'lodash';
 
 /**
  * Internal dependencies
@@ -18,71 +17,36 @@ import { Component } from '@wordpress/element';
 import { Placeholder } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import { withSelect, dispatch } from '@wordpress/data';
+import { withSelect, withDispatch } from '@wordpress/data';
 
 class GuidepostEdit extends Component {
-	constructor() {
-		super( ...arguments );
-		this.headingsHaveChanged = this.headingsHaveChanged.bind( this );
-		this.convertHeadingBlocksToAttributes = this.convertHeadingBlocksToAttributes.bind( this );
-	}
-
 	componentDidUpdate( prevProps ) {
-		// Add anchors to all headings without an anchor.
-		this.props.headings
-			.filter( ( heading ) => typeof heading.attributes.anchor === 'undefined' )
-			.forEach( ( block ) => dispatch( 'core/block-editor' ).updateBlockAttributes(
-				block.clientId,
-				{ anchor: uniqid.time() + '-' + kebabCase( block.attributes.content ) }
-			) );
+		const {
+			headingBlocks,
+			headings,
+			setAttributes,
+			updateBlockAttributes,
+		} = this.props;
 
-		const newHeadings = this.convertHeadingBlocksToAttributes( prevProps.headings );
-		if ( this.headingsHaveChanged( prevProps.attributes.headings, newHeadings ) ) {
-			this.props.setAttributes( { headings: newHeadings } );
+		if ( ! isEqual( prevProps.attributes.headings, headings ) ) {
+			// Generate new anchors for duplicated headings.
+			headingBlocks.forEach( ( heading, index ) => {
+				const duplicateHeadings = headingBlocks.filter( ( block ) => block.attributes.anchor === heading.attributes.anchor );
+
+				if ( ( duplicateHeadings && duplicateHeadings.length > 1 ) || typeof heading.attributes.anchor === 'undefined' || heading.attributes.anchor === '' ) {
+					updateBlockAttributes(
+						heading.clientId,
+						{ anchor: index + '-' + kebabCase( heading.attributes.content ) }
+					);
+				}
+			} );
+
+			setAttributes( { headings } );
 		}
-	}
-
-	headingsHaveChanged( oldHeadings = [], newHeadings ) {
-		if ( oldHeadings.length !== newHeadings.length ) {
-			return true;
-		}
-
-		const changedHeadings = oldHeadings.filter( ( heading, index ) => {
-			const newHeading = newHeadings[ index ];
-
-			return (
-				heading.content !== newHeading.content ||
-				heading.anchor !== newHeading.anchor ||
-				heading.level !== newHeading.level
-			);
-		} );
-
-		// Return boolean value from length.
-		return ! ! +changedHeadings.length;
-	}
-
-	convertHeadingBlocksToAttributes( headingBlocks ) {
-		return headingBlocks.map( function( heading ) {
-			const level = heading.attributes.level.toString();
-
-			const headingContent = heading.attributes.content || '';
-			const anchorContent = heading.attributes.anchor || '';
-
-			// strip html from heading and attribute content
-			const contentDiv = document.createElement( 'div' );
-
-			contentDiv.innerHTML = headingContent;
-			const content = contentDiv.textContent || contentDiv.innerText || '';
-
-			contentDiv.innerHTML = anchorContent;
-			const anchor = contentDiv.textContent || contentDiv.innerText || '';
-
-			return { content, anchor, level };
-		} );
 	}
 
 	render() {
-		const { headings = [] } = this.props.attributes;
+		const { headings = [] } = this.props;
 
 		if ( headings < 1 ) {
 			return (
@@ -108,8 +72,22 @@ export const Edit = compose( [
 	withSelect( ( select ) => {
 		const { getBlocks } = select( 'core/block-editor' );
 
+		const headingBlocks = getBlocks().filter( ( block ) => block.name === 'core/heading' && !! block.attributes.content );
+
 		return {
-			headings: getBlocks().filter( ( block ) => block.name === 'core/heading' && !! block.attributes.content ),
+			headingBlocks,
+			headings: headingBlocks.map( ( block ) => ( {
+				content: block.attributes.content,
+				anchor: '#' + block.attributes.anchor,
+				level: block.attributes.level.toString(),
+			} ) ),
+		};
+	} ),
+	withDispatch( ( dispatch ) => {
+		const { updateBlockAttributes } = dispatch( 'core/block-editor' );
+
+		return {
+			updateBlockAttributes,
 		};
 	} ),
 ] )( GuidepostEdit );
