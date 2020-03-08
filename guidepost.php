@@ -40,21 +40,6 @@ function guidepost_register_block() {
 		true // Enqueue script in the footer.
 	);
 
-	// Frontend Script.
-	$asset_filepath = GUIDEPOST_PLUGIN_DIR . '/build/guidepost-theme.asset.php';
-	$asset_file     = file_exists( $asset_filepath ) ? include $asset_filepath : array(
-		'dependencies' => array(),
-		'version'      => GUIDEPOST_VERSION,
-	);
-
-	wp_register_script(
-		'guidepost-frontend',
-		GUIDEPOST_PLUGIN_URL . 'build/guidepost-theme.js',
-		$asset_file['dependencies'],
-		$asset_file['version'],
-		true
-	);
-
 	// Editor Styles.
 	$asset_filepath = GUIDEPOST_PLUGIN_DIR . '/build/guidepost-editor.asset.php';
 	$asset_file     = file_exists( $asset_filepath ) ? include $asset_filepath : $default_asset_file;
@@ -82,10 +67,32 @@ function guidepost_register_block() {
 		array(
 			'editor_script' => 'guidepost-editor',
 			'editor_style'  => 'guidepost-editor',
-			'script'        => 'guidepost-frontend',
 			'style'         => 'guidepost-frontend',
 		)
 	);
 }
 
 add_action( 'init', 'guidepost_register_block' );
+
+/**
+ * Enqueues the frontend script.
+ */
+function guidepost_enqueue_scripts() {
+	$asset_filepath = GUIDEPOST_PLUGIN_DIR . '/build/guidepost-theme.asset.php';
+	$asset_file     = file_exists( $asset_filepath ) ? include $asset_filepath : array(
+		'dependencies' => array(),
+		'version'      => GUIDEPOST_VERSION,
+	);
+
+	if ( has_block( 'sortabrilliant/guidepost' ) ) {
+		wp_enqueue_script(
+			'guidepost-frontend',
+			GUIDEPOST_PLUGIN_URL . 'build/guidepost-theme.js',
+			$asset_file['dependencies'],
+			$asset_file['version'],
+			true
+		);
+	}
+}
+
+add_action( 'wp_enqueue_scripts', 'guidepost_enqueue_scripts' );
