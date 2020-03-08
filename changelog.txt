@@ -1,0 +1,19 @@
+
+1.2.0 / 2020-03-08
+===================
+
+### Enhancements
+* Performances improvements while editing heading blocks
+* Remove jQuery as a dependency
+
+### Bug Fixes
+* Allow upgrading from versions prior to 1.1.0 with the block name `sbb/guidepost`
+* Prevent front-end script from loading within the editor
+* Prevent duplicate anchors on headings.
+
+
+1.1.0 / 2020-02-13
+===================
+
+### Misc
+* Cleanup for directory submission

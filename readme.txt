@@ -1,9 +1,9 @@
 === Guidepost ===
 Contributors: sortabrilliant, jrtashjian
-Tags: typedjs, heading, style, block
+Tags: heading, style, block
 Requires at least: 5.0
 Tested up to: 5.3.2
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -26,6 +26,12 @@ This plugin is brought to you by [sorta brilliant](https://sortabrilliant.com/) 
 1. Add the Guidepost block and everything is taken care of automatically.
 
 == Changelog ==
-* Cleanup for directory submission.
 
+### Enhancements
+* Performances improvements while editing heading blocks
+* Remove jQuery as a dependency
 
+### Bug Fixes
+* Allow upgrading from versions prior to 1.1.0 with the block name `sbb/guidepost`
+* Prevent front-end script from loading within the editor
+* Prevent duplicate anchors on headings.
