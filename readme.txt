@@ -27,11 +27,8 @@ This plugin is brought to you by [sorta brilliant](https://sortabrilliant.com/) 
 
 == Changelog ==
 
-### Enhancements
-* Performances improvements while editing heading blocks
-* Remove jQuery as a dependency
-
 ### Bug Fixes
-* Allow upgrading from versions prior to 1.1.0 with the block name `sbb/guidepost`
-* Prevent front-end script from loading within the editor
-* Prevent duplicate anchors on headings.
+* Remove extraneous HTML elements in saved output
+
+### Misc
+* Bumping "Tested up to" for WordPress 5.4.0
