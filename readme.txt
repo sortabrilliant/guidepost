@@ -29,6 +29,7 @@ This plugin is brought to you by [sorta brilliant](https://sortabrilliant.com/) 
 
 ### Bug Fixes
 * Remove extraneous HTML elements in saved output
+* Fix visual nesting of elements when editing
 
 ### Misc
 * Bumping "Tested up to" for WordPress 5.4.0
