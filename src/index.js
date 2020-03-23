@@ -2,6 +2,7 @@
  * Internal dependencies
  */
 import metadata from './block.json';
+import { deprecated } from './deprecated';
 import { Edit as edit } from './edit';
 import { Icon as icon } from './icon';
 import { Save as save } from './save';
@@ -40,6 +41,7 @@ registerBlockType( 'sortabrilliant/guidepost', {
 		],
 	},
 
+	deprecated,
 	edit,
 	save,
 } );

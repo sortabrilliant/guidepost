@@ -14,7 +14,7 @@ import { linearToNestedList } from './linear-to-nested-list';
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
-import { Placeholder } from '@wordpress/components';
+import { Placeholder, Disabled } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
 import { withSelect, withDispatch } from '@wordpress/data';
@@ -62,7 +62,9 @@ class GuidepostEdit extends Component {
 
 		return (
 			<div className={ this.props.className }>
-				<Guidepost headings={ nestedHeadings } />
+				<Disabled>
+					<Guidepost headings={ nestedHeadings } />
+				</Disabled>
 			</div>
 		);
 	}
